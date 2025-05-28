@@ -137,18 +137,18 @@ int main(void)
 
   /* Mount SD Card */
   fresult = f_mount(&fs, "/", 1);
-  if (fresult != FR_OK) send_uart ("ERROR!!! in mounting SD CARD...\n\n");
+  if (fresult != FR_OK) send_uart ("SD CARD: ERROR!!! in mounting SD CARD...\n\n");
   else send_uart("SD CARD mounted successfully...\n\n");
 
   /* Card Capacity Details */
   f_getfree("", &fre_clust, &pfs);
 
   total = (uint32_t)((pfs->n_fatent-2) * pfs->csize * 0.5);
-  sprintf(buffer, "SD CARD Total Size: \t%lu\n", total);
+  sprintf(buffer, "SD CARD: SD CARD Total Size: \t%lu\n", total);
   send_uart(buffer);
   bufclear();
   free_space = (uint32_t)(fre_clust * pfs->csize * 0.5);
-  sprintf(buffer, "SD CARD Free Space: \t%lu\n", free_space);
+  sprintf(buffer, "SD CARD: SD CARD Free Space: \t%lu\n", free_space);
   send_uart(buffer);
 
 
@@ -159,7 +159,7 @@ int main(void)
   fresult = f_open(&file, "eren.txt", FA_OPEN_ALWAYS | FA_READ | FA_WRITE);
 
   //Writing Text
-  fresult = f_puts("Hello World. Selam dunya\n\n", &file);
+  fresult = f_puts("SD CARD (eren.txt): Hello World. Selam dunya\n\n", &file);
 
   //Close file
   fresult = f_close(&file);
@@ -178,7 +178,7 @@ int main(void)
 
   bufclear();
 
-  send_uart("eren.txt created and the data is written\n");
+  send_uart("SD CARD: eren.txt created and the data is written\n");
 
   /* USER CODE END 2 */
 
