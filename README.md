@@ -48,16 +48,16 @@ This project demonstrates how to create, write to, and delete a `.txt` file on a
 ## 🛠️ Project Setup
 The Modules to be used in the project are <strong>SPI1</strong> and <strong>USART2</strong>. As you can see, pin adjustment needs to be made.
 
-<img src="images/1.png" alt="" width="400"><hr>
+<img src="images/1.png" alt="" width="900"><hr>
 
 The SPI settings should be as seen. The Prescaler value should be set so that the Baud Rate is generally around <strong>2.5MB</strong>.
 
-<img src="images/2.png" alt="" width="400"><hr>
+<img src="images/2.png" alt="" width="900"><hr>
 
 After the <strong>fatfs_sd.c</strong> and <strong>fatfs_sd.h</strong> files are uploaded into the project, the SD_CS pin and other changes must be made in the <strong>fatfs_sd.c</strong> file
 > Note: If you are going to use F1XX instead of F4XX, you need to change the include codes.
 
-<img src="images/3.png" alt="" width="400"><hr>
+<img src="images/3.png" alt="" width="900"><hr>
 
 We need to update the <strong> FATFS/Target/user_diskio.c</strong> file to match our sd card library. Step by step it is necessary to paste the codes in the specified places.
 
@@ -68,7 +68,7 @@ We need to update the <strong> FATFS/Target/user_diskio.c</strong> file to match
 	return SD_disk_initialize(pdrv);
   /* USER CODE END INIT */
 ```
-<img src="images/4.png" alt="" width="400">
+<img src="images/4.png" alt="" width="900">
 
 ```c
     /* USER CODE BEGIN STATUS */
@@ -85,7 +85,7 @@ We need to update the <strong> FATFS/Target/user_diskio.c</strong> file to match
     return SD_disk_read(pdrv, buff, sector, count);
     /* USER CODE END READ */
 ```
-<img src="images/5.png" alt="" width="400">
+<img src="images/5.png" alt="" width="900">
 
 ```c
     /* USER CODE BEGIN WRITE */
@@ -94,7 +94,7 @@ We need to update the <strong> FATFS/Target/user_diskio.c</strong> file to match
     return SD_disk_write(pdrv, buff, sector, count);
     /* USER CODE END WRITE */
 ```
-<img src="images/6.png" alt="" width="400">
+<img src="images/6.png" alt="" width="900">
 
 ```c
     /* USER CODE BEGIN IOCTL */
@@ -104,7 +104,7 @@ We need to update the <strong> FATFS/Target/user_diskio.c</strong> file to match
     /* USER CODE END IOCTL */
 ```
 
-<img src="images/7.png" alt="" width="400"><hr>
+<img src="images/7.png" alt="" width="900"><hr>
 
 We need to add some variables and functions to the <strong>stm32f4xx_it.c</strong> file
 
@@ -120,7 +120,7 @@ void SDTimer_Handler(void)
 		Timer2--;
 }
 ```
-<img src="images/8.png" alt="" width="400">
+<img src="images/8.png" alt="" width="900">
 
 Also update the SysTick_Handler function as below
 ```c
@@ -141,15 +141,15 @@ void SysTick_Handler(void)
     /* USER CODE END SysTick_IRQn 1 */
 }
 ```
-<img src="images/9.png" alt="" width="400"><hr>
+<img src="images/9.png" alt="" width="900"><hr>
 
 We must define the specified variables in the A file, write the necessary functions.
-<img src="images/10.png" alt="" width="400">
-<img src="images/11.png" alt="" width="400"><hr>
+<img src="images/10.png" alt="" width="900">
+<img src="images/11.png" alt="" width="900"><hr>
 
 ## 🧠 Project Structure
 Below is a table explaining the functions of the library.
-<img src="images/sdcard_funcs.png" alt="" width="400"><hr>
+<img src="images/sdcard_funcs.png" alt="" width="900"><hr>
 
 MOUTING: f_mount will mount the SD card. “/” is the path, that we want to mount. fs is the pointer to the file system, which we need to define as a global definition, as we are going to use it a lot.
 ```c
@@ -193,14 +193,6 @@ The following code is executed to find out the capacity and free space informati
 
 <hr>
 
-### CLOSING:
-
-```c
-  //Close file
-  fresult = f_close(&file);
-```
-<hr>
-
 ### READING:
 
 ```c
@@ -211,6 +203,14 @@ The following code is executed to find out the capacity and free space informati
   f_gets(buffer, file.obj.objsize, &file);
 ```
 
+<hr>
+
+### CLOSING:
+
+```c
+  //Close file
+  fresult = f_close(&file);
+```
 
 <hr>
 
